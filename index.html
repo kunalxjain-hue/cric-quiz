@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cricket Fun Quiz</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url('https://pngtree.com/free-backgrounds-photos/cricket-stadium') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        text-align: center;
+    }
+
+    .box {
+        background: rgba(0,0,0,0.7);
+        padding: 40px;
+        margin: 100px auto;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 12px;
+    }
+
+    button {
+        padding: 12px 25px;
+        margin: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .yes { background: #2ecc71; }
+    .no  { background: #e74c3c; }
+
+    .hidden { display: none; }
+
+    .big-text {
+        font-size: 36px;
+        animation: pop 1s infinite alternate;
+    }
+
+    @keyframes pop {
+        from { transform: scale(1); }
+        to { transform: scale(1.1); }
+    }
+
+    a {
+        color: #f1c40f;
+        font-size: 22px;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="box" id="start">
+    <a onclick="show('q1')">Click here to start</a>
+</div>
+
+<div class="box hidden" id="q1">
+    <h2>Are you a boy?</h2>
+    <button class="yes" onclick="show('q2')">Yes</button>
+    <button class="no" onclick="wrong('q1')">No</button>
+</div>
+
+<div class="box hidden" id="q2">
+    <h2>Do you love cricket?</h2>
+    <button class="yes" onclick="show('q3')">Yes</button>
+    <button class="no" onclick="wrong('q2')">No</button>
+</div>
+
+<div class="box hidden" id="q3">
+    <h2>Who is the God of Cricket?</h2>
+    <button class="yes" onclick="sachin()">Sachin Tendulkar</button>
+    <button class="no" onclick="virat()">Virat Kohli</button>
+</div>
+
+<div class="box hidden" id="wrong">
+    <h2>❌ chhakka bhadwa.</h2>
+    <p>Redirecting...</p>
+</div>
+
+<div class="box hidden" id="sachin">
+    <div class="big-text">
+        🏏🍑<br>
+        Bat ki grip nikal ke bat gaand mein lele!
+    </div>
+</div>
+
+<div class="box hidden" id="virat">
+    <div class="big-text">
+        🍆🍇🍇<br>
+        Lund lele uska muh mein!
+    </div>
+</div>
+
+<script>
+let lastQuestion = '';
+
+function show(id) {
+    document.querySelectorAll('.box').forEach(b => b.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    lastQuestion = id;
+}
+
+function wrong(backTo) {
+    lastQuestion = backTo;
+    document.querySelectorAll('.box').forEach(b => b.classList.add('hidden'));
+    document.getElementById('wrong').classList.remove('hidden');
+
+    // Auto go back after 1.5 seconds
+    setTimeout(() => {
+        show(lastQuestion);
+    }, 1500);
+}
+
+function sachin() {
+    show('sachin');
+}
+
+function virat() {
+    show('virat');
+}
+</script>
+
+</body>
+</html>
